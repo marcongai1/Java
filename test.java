@@ -1,28 +1,29 @@
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-public class test{
-    public test(){
-        //code goes here
-        int list[][]=new int[4][3];
-        list[3][2]=6;
-        list[3][1]=7;
-        list[3][0]=8;
-for(int y=list[0].length-1;y >= 0; y--)
-{
-    for(int x=list.length-2;x >= 0; x--)
-    {
-         list[x][y]=list[x+1][y]+y;
-    }
-}
-for(int y=0;y < list[0].length; y++)
-{
-    for(int x=list.length-1;x >= 0;x--)
-        System.out.print(list[x][y]+ " ");
-    System.out.println();
-}
+public class test {
 
+    public test() {
+        System.out.print(lengthOfLongestSubstring("asdasldj"));
     }
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         test app = new test();
     }
+
+public int lengthOfLongestSubstring(String s) {
+    int n = s.length();
+    Set<Character> set = new HashSet<>();
+    int ans = 0, i = 0, j = 0;
+    while (i < n && j < n) {
+        if (!set.contains(s.charAt(j))) {
+            set.add(s.charAt(j++));
+            ans = Math.max(ans, j - i);
+        } else {
+            set.remove(s.charAt(i++));
+        }
+    }
+    return ans;
+}
 }

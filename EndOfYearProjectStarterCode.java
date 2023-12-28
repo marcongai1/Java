@@ -24,13 +24,14 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 	private boolean gameOn, left, right, timer;
 	private Font f;
 	private Color color;
+	private boolean up1,up2,down1,down2;
 	public EndOfYearProjectStarterCode()
 	{
 		frame=new JFrame("Pong");
-		x=375;
-		y=250;
-		y1=250;
-		y2=250;
+		x = 375;
+		y = 250;
+		y1 = 250;
+		y2 = 250;
 		a = 400;
 		b = 200;
 		seconds = 0;
@@ -46,7 +47,7 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 			velocityY = (int)(Math.random()*5);
 		else
 			velocityY = (int)(-Math.random()*5);
-		gameOn=true;
+		gameOn = true;
 		left = false;
 		right = false;
 		timer = false;
@@ -167,6 +168,14 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 					x+=velocityX;
 				}
 				y+=velocityY;
+				if(up1)
+					y1-=5;
+				if(up2)
+					y2-=5;
+				if(down1)
+					y1 += 5;
+				if(down2)
+					y2 += 5;
 				//prevents player 2 from going below the game
 				if (y2>=415)
 					y2 = 415;
@@ -248,6 +257,8 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 					gameOn = false;
 					timer = false;
 				}
+				//Smooth movement
+
 /*				if (ball.intersects(r2))
 					System.out.println("OUCH");
 
@@ -277,18 +288,30 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 		//d
 		if(ke.getKeyCode()==68)
 			x++; */
+		// //up arrow (player two)
+		// if(ke.getKeyCode()==38)
+		// 	y2-=10;
+		// //w (player one)
+		// if(ke.getKeyCode()==87)
+		// 	y1-=10;
+		// //down arrow (player two)
+		// if(ke.getKeyCode()==40)
+		// 	y2+=10;
+		// //s (player one)
+		// if(ke.getKeyCode()==83)
+		// 	y1+=10;
 		//up arrow (player two)
 		if(ke.getKeyCode()==38)
-			y2-=10;
+			up2 = true;
 		//w (player one)
 		if(ke.getKeyCode()==87)
-			y1-=10;
+			up1 = true;
 		//down arrow (player two)
 		if(ke.getKeyCode()==40)
-			y2+=10;
+			down2 = true;
 		//s (player one)
 		if(ke.getKeyCode()==83)
-			y1+=10;
+			down1 = true;
 /*		//left arrow
 		if(ke.getKeyCode()==37)
 			x--;
@@ -306,16 +329,16 @@ public class EndOfYearProjectStarterCode extends JPanel implements KeyListener,R
 			x+=0;
 		//up arrow
 		if(ke.getKeyCode()==38)
-			y+=0;
+			up2 = false;
 		//w
 		if(ke.getKeyCode()==87)
-			y+=0;
+			up1 = false;
 		//down arrow
 		if(ke.getKeyCode()==40)
-			y+=0;
+			down2 = false;
 		//s
 		if(ke.getKeyCode()==83)
-			y+=0;
+			down1 = false;
 		//left arrow
 		if(ke.getKeyCode()==37)
 			x+=0;
